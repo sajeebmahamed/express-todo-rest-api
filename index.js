@@ -7,7 +7,8 @@ const {
    notFoundHandler,
    errorHandler,
 } = require("./middlewares/common/errorHandler");
-const router = require("./router/todoRouter");
+const todoRouter = require("./router/todoRouter");
+const loginRouter = require("./router/loginRouter");
 
 // db connection
 mongoose
@@ -27,7 +28,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // routing setup
-app.use("/", router);
+app.use("/", todoRouter);
+app.use("/user", loginRouter);
 
 // 404 not found handler
 app.use(notFoundHandler);
