@@ -63,6 +63,7 @@ const registerValidatorsHandler = function (req, res, next) {
    }
 };
 
+// login
 const doLoginValidators = [
    check("username")
       .isLength({

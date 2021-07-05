@@ -85,7 +85,7 @@ const getTodo = async (req, res, next) => {
 // get all todos
 const getTodos = async (req, res, next) => {
    try {
-      const todos = await Todo.find();
+      const todos = await Todo.find({}).populate("user", "name email _id");
       res.status(200).json({ message: "All Todos loaded!", todos });
    } catch (error) {
       next(error);
@@ -98,6 +98,7 @@ const createTodo = async (req, res) => {
    const todo = {
       title,
       isCompleted: false,
+      user: req.userId,
    };
    const newTodo = new Todo(todo);
    try {
@@ -108,7 +109,7 @@ const createTodo = async (req, res) => {
       res.status(500).json({
          errors: {
             common: {
-               message: "Unkown error occured!.",
+               message: error,
             },
          },
       });

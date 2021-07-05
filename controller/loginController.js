@@ -42,6 +42,7 @@ const login = async (req, res, next) => {
             // prepare the user object to generate token
             const userObject = {
                username: user.name,
+               userId: user._id,
                phone: user.phone,
                email: user.email,
                role: "user",
