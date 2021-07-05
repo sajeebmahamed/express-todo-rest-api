@@ -1,6 +1,7 @@
 // external imports
 const express = require("express");
 const mongoose = require("mongoose");
+const dotenv = require("dotenv");
 
 // internal imports
 const {
@@ -9,6 +10,7 @@ const {
 } = require("./middlewares/common/errorHandler");
 const todoRouter = require("./router/todoRouter");
 const loginRouter = require("./router/loginRouter");
+require("dotenv").config();
 
 // db connection
 mongoose
