@@ -3,7 +3,7 @@ const createError = require("http-errors");
 
 // internal imports
 const Todo = require("../models/Todo");
-
+const User = require("../models/People");
 // delete a todo
 const deleteTodo = async (req, res) => {
    const { id } = req.params;
@@ -85,7 +85,9 @@ const getTodo = async (req, res, next) => {
 // get all todos
 const getTodos = async (req, res, next) => {
    try {
-      const todos = await Todo.find({}).populate("user", "name email _id");
+      const todos = await Todo.find({
+         user: req.userId,
+      }).populate("user", "name email _id");
       res.status(200).json({ message: "All Todos loaded!", todos });
    } catch (error) {
       next(error);
@@ -103,8 +105,18 @@ const createTodo = async (req, res) => {
    const newTodo = new Todo(todo);
    try {
       const result = await newTodo.save();
+      await User.updateOne(
+         {
+            _id: req.userId,
+         },
+         {
+            $push: {
+               todos: result._id,
+            },
+         }
+      );
       const todos = await Todo.find();
-      res.status(201).json({ message: "Todo added successfully.", todos });
+      res.status(201).json({ message: "Todo added successfully.", result });
    } catch (error) {
       res.status(500).json({
          errors: {

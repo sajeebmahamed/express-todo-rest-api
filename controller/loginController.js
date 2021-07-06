@@ -9,7 +9,7 @@ const User = require("../models/People");
 // get users
 const allUsers = async (req, res, next) => {
    try {
-      const users = await User.find({});
+      const users = await User.find({}).populate("todos");
       res.status(200).json({
          message: "All users loaded!.",
          user: users,

@@ -27,7 +27,7 @@ router.patch("/:id", patchTodo);
 router.put("/:id", checkaddTodo, addTodoValidationResult, updateTodo);
 
 // get a todo
-router.get("/:id", getTodo);
+router.get("/:id", checkLogin, getTodo);
 
 // get todos
 router.get("/", checkLogin, getTodos);
