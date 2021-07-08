@@ -1,6 +1,7 @@
 // external imports
 const express = require("express");
 const mongoose = require("mongoose");
+const morgan = require("morgan");
 const dotenv = require("dotenv");
 
 // internal imports
@@ -25,6 +26,7 @@ mongoose
 // init app
 const app = express();
 app.use(express.urlencoded({ extended: true }));
+app.use(morgan("dev"));
 
 // request parser
 app.use(express.json());

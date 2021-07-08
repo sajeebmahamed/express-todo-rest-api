@@ -115,8 +115,8 @@ const createTodo = async (req, res) => {
             },
          }
       );
-      const todos = await Todo.find();
-      res.status(201).json({ message: "Todo added successfully.", result });
+      const todos = await Todo.find({ user: req.userId });
+      res.status(201).json({ message: "Todo added successfully.", todos });
    } catch (error) {
       res.status(500).json({
          errors: {
