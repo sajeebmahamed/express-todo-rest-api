@@ -26,6 +26,12 @@ const peopleSchema = mongoose.Schema(
          enum: ["admin", "user"],
          default: "user",
       },
+      todos: [
+         {
+            type: mongoose.Types.ObjectId,
+            ref: "Todo",
+         },
+      ],
    },
    {
       timestamps: true,

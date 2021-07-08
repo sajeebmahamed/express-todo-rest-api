@@ -8,6 +8,7 @@ const {
    getTodo,
    getTodos,
 } = require("../controller/todoController");
+const checkLogin = require("../middlewares/auth_gurd/checkLogin");
 const {
    checkaddTodo,
    addTodoValidationResult,
@@ -26,12 +27,12 @@ router.patch("/:id", patchTodo);
 router.put("/:id", checkaddTodo, addTodoValidationResult, updateTodo);
 
 // get a todo
-router.get("/:id", getTodo);
+router.get("/:id", checkLogin, getTodo);
 
 // get todos
-router.get("/", getTodos);
+router.get("/", checkLogin, getTodos);
 
 // create a todo
-router.post("/", checkaddTodo, addTodoValidationResult, createTodo);
+router.post("/", checkLogin, checkaddTodo, addTodoValidationResult, createTodo);
 
 module.exports = router;

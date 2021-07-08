@@ -3,6 +3,7 @@ const express = require("express");
 
 // internal imports
 const { regiser, login, allUsers } = require("../controller/loginController");
+const checkLogin = require("../middlewares/auth_gurd/checkLogin");
 const {
    registerValidators,
    registerValidatorsHandler,
@@ -14,7 +15,7 @@ const {
 const router = express.Router();
 
 // load all users
-router.get("/all", allUsers);
+router.get("/all", checkLogin, allUsers);
 
 // user login
 router.post("/login", doLoginValidators, doLoginValidationHandlers, login);

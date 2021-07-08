@@ -9,6 +9,10 @@ const todoSchema = mongoose.Schema(
       isCompleted: {
          type: Boolean,
       },
+      user: {
+         type: mongoose.Types.ObjectId,
+         ref: "People",
+      },
    },
    { timestamps: true }
 );
